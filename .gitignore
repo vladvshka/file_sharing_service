@@ -1,0 +1,5 @@
+configs/nodeMailerConfigs.js
+configs/keys.js
+configs/dbConfigs.js
+node_modules/
+*.gz

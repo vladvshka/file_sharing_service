@@ -1,0 +1,50 @@
+#myProgress {
+	visibility: hidden;
+	width: 100%;
+	background-color: grey;
+	text-align: center;
+	position: relative;
+}
+
+#myBar {
+	width: 0%;
+	height: 30px;
+	background-color: #4caf50;
+	line-height: 30px;
+	color: white;
+}
+
+#barLabel {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	margin: auto;
+}
+
+.navigation-item a {
+	position: relative;
+}
+.navigation-item a:hover {
+	color: #555;
+}
+.navigation-item a:after,
+.navigation-item a:before {
+	transition: all 0.5s;
+}
+.navigation-item a:after {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+	width: 0%;
+	content: ".";
+	color: transparent;
+	background: #aaa;
+	height: 1px;
+}
+.navigation-item a:hover:after {
+	width: 100%;
+}

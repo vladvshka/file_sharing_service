@@ -1,0 +1,21 @@
+if accountCreated
+    div
+        .alert.alert-success(role='alert') Your account has been successfully created. Please, confirm your email.
+if noUser
+    div
+        .alert.alert-danger(role='alert') Such user doesn't exist!
+if emailVerified
+    div
+        .alert.alert-success(role='alert') Your email is successfully verified!
+if alreadyVerified
+    div
+        .alert.alert-info(role='alert') Your email is already verified.
+if userExists
+    div
+        .alert.alert-danger(role='alert') Such user already exists.
+if unauthorized
+    div
+        .alert.alert-warning(role='alert') Please, sign-in to use File Uploader.
+if verifyEmail
+    div
+        .alert.alert-warning(role='alert') Please, verify your email.

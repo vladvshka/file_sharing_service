@@ -1,0 +1,39 @@
+doctype html
+head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    meta(http-equiv='X-UA-Compatible' content='ie=edge')
+    link(rel='stylesheet' type='text/css' href='../style.css')
+    link(href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css", rel="stylesheet", integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh", crossorigin="anonymous")
+    title File Uploader
+include navBar.pug
+.container
+    include infoMessage.pug
+    if signUp
+        h3 Please, register to use File Uploader
+        form#sign-up-form(action="/sign-up", method="post")
+            .form-group
+                label(for='login') Login
+                input#login.form-control(type='text' name="login")
+            .form-group
+                label(for='password') Password
+                input#password.form-control(type='password' name="password")
+            .form-group
+                label(for='email') Email address
+                input#email.form-control(type='email' aria-describedby='emailHelp' name="email")
+                small#emailHelp.form-text.text-muted We&apos;ll never share your email with anyone else.
+            .form-group
+                a(href="/sign-in") Already have an account?
+            button.btn.btn-primary(type='submit') Sign Up
+    if signIn
+        h3 Welcome back to File Uploader
+        form(action="/sign-in", method="post")
+            .form-group
+                label(for='login') Login
+                input#login.form-control(type='text' name="login")
+            .form-group
+                label(for='password') Password
+                input#password.form-control(type='password' name="password")
+            .form-group
+                a(href="/sign-up") Want to create account?
+            button#sign-in.btn.btn-primary(type='submit') Sign In
