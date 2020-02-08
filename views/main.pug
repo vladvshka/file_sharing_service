@@ -10,15 +10,16 @@ include navBar.pug
 .container
     if shouldShowHistory
         include history.pug
-    form#form(action='/upload' method='post' enctype='multipart/form-data')
-        | Comment: 
-        input(type='text' name='comment' class="form-control")
-        br
-        .input-group.mb-3
-            input(type='file' name='attachment')
-        br  
-        input(type='submit' value='Upload' class="btn btn-success")
-    #myProgress
-        #myBar
-            span#barLabel 0%
+    else
+        form#form(action='/upload' method='post' enctype='multipart/form-data')
+            | Comment: 
+            input(type='text' name='comment' class="form-control")
+            br
+            .input-group.mb-3
+                input(type='file' name='attachment')
+            br  
+            input(type='submit' value='Upload' class="btn btn-success")
+        #myProgress
+            #myBar
+                span#barLabel 0%
 script(type='module' src='../fileUploaderClient.js')

@@ -19,3 +19,6 @@ if unauthorized
 if verifyEmail
     div
         .alert.alert-warning(role='alert') Please, verify your email.
+if internalError
+    div
+        .alert.alert-danger(role='alert')= internalError

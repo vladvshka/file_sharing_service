@@ -1,7 +1,11 @@
 div
-    ul.list-group
+    if uploads.length
+        ul.list-group
         each upload in uploads
             li.list-group-item.d-flex.justify-content-between.align-items-center
                 = upload.fileName
                 span.badge.badge-primary.badge-pill= upload.comment
                 a(href=`/download/${upload.fileId}`) Download
+    else
+        div
+            .alert.alert-info(role='alert') Sorry, currently there is nothing to download.
