@@ -10,6 +10,11 @@ import { logLine } from '../shared/index';
 const authRouter = express.Router();
 const upload = multer();
 
+authRouter.use((req, res, next) => {
+	logLine(`In auth Router: ${JSON.stringify(req.session, null, 2)}`);
+	next();
+});
+
 authRouter.get('/sign-up', (req, res) => {
 	res.render('authForm', { signUp: true });
 });
@@ -104,7 +109,18 @@ authRouter.post('/sign-in', upload.none(), async (req, res) => {
 				if (isEmailVerified) {
 					// Successful authorization
 					req.session.isAuthorized = true;
-					res.redirect(302, '../');
+
+					// Save session from store to DB explicitly to have actual session state after the redirection.
+					req.session.save(err => {
+						if (err) {
+							res.status(500).render('authForm', {
+								signIn: true,
+								internalError: JSON.stringify(err.message)
+							});
+						}
+
+						res.redirect(302, '../');
+					});
 				} else {
 					res.status(403).render('authForm', {
 						signIn: true,

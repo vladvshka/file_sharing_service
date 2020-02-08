@@ -1,4 +1,4 @@
-import { SESSION_SECRET } from "./keys";
+import { SESSION_SECRET } from './keys';
 
 export const getSessionConfigs = sessionStore => ({
 	secret: SESSION_SECRET,
@@ -9,7 +9,8 @@ export const getSessionConfigs = sessionStore => ({
 	 * Choosing false is useful for implementing login sessions, reducing server storage usage
 	 */
 	saveUninitialized: false,
-	cookie: { maxAge: 1000 * 120 },
-	name: "session",
+	cookie: { maxAge: 1000 * 30 },
+	name: 'session',
 	store: sessionStore,
+	rolling: true
 });

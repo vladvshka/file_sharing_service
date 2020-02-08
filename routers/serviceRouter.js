@@ -28,8 +28,21 @@ const upload = multer({ storage: multerStorage });
 const attachment = upload.single('attachment');
 
 serviceRouter.use((req, res, next) => {
-	// logLine(`req.session: ${JSON.stringify(req.session)}`);
+	logLine(`In service Router: ${JSON.stringify(req.session, null, 2)}`);
 	if (req.session.isAuthorized) {
+		// req.session.cookie.expires = new Date(Date.now() + 1000000);
+
+		// // TODO: issue of not refreshing cookie in browser
+		// req.session.save(err => {
+		// 	if (err) {
+		// 		res.status(500).render('authForm', {
+		// 			signIn: true,
+		// 			internalError: JSON.stringify(err.message)
+		// 		});
+		// 	}
+
+		// 	next();
+		// });
 		next();
 	} else {
 		res.redirect(302, '/sign-in/unauthorized');
@@ -117,6 +130,8 @@ serviceRouter.get('/', async (req, res) => {
 
 // With uploads history
 serviceRouter.get('/history', async (req, res) => {
+	logLine('In history req.session: ', req.session);
+
 	const storageJson = await fsp.readFile(
 		path.join(__dirname, '../', 'public', 'storage.json'),
 		'utf8'
