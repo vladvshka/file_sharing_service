@@ -1,4 +1,5 @@
-import { CONNECTION_ID, PROGRESS, logLine } from '../shared/index';
+// eslint-disable-next-line import/extensions
+import { CONNECTION_ID, PROGRESS, logLine } from '../shared/index.js';
 
 (async () => {
 	// TODO: move id generation to server. Make another req after GET of the main page.
@@ -26,6 +27,7 @@ import { CONNECTION_ID, PROGRESS, logLine } from '../shared/index';
 
 	const establishWebSocketConnection = () => {
 		const connectionId = uuidv4();
+		// TODO - will be a local IP after nginx
 		const url = `ws://${window.location.hostname}:7181/`;
 		/**
 		 * Web socket protocol supports text and binary data.
@@ -98,5 +100,8 @@ import { CONNECTION_ID, PROGRESS, logLine } from '../shared/index';
 		}
 	};
 
-	document.getElementById('form').addEventListener('submit', handleUpload);
+	const form = document.getElementById('form');
+	if (form) {
+		form.addEventListener('submit', handleUpload);
+	}
 })();

@@ -9,7 +9,7 @@ export const getSessionConfigs = sessionStore => ({
 	 * Choosing false is useful for implementing login sessions, reducing server storage usage
 	 */
 	saveUninitialized: false,
-	cookie: { maxAge: 1000 * 30 },
+	cookie: { maxAge: 1000 * 1000 },
 	name: 'session',
 	store: sessionStore,
 	rolling: true

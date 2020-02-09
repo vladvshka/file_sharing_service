@@ -27,7 +27,7 @@ const upload = multer({ storage: multerStorage });
 // fieldname === attachment, it must be the name of input type="file"
 const attachment = upload.single('attachment');
 
-const verifier = (req, res, next) => {
+const verifyer = (req, res, next) => {
 	logLine(`In service Router: ${JSON.stringify(req.session, null, 2)}`);
 	if (req.session.isAuthorized) {
 		next();
@@ -36,12 +36,12 @@ const verifier = (req, res, next) => {
 	}
 };
 
-serviceRouter.get('/upload', verifier, async (req, res) => {
+serviceRouter.get('/upload', verifyer, (req, res) => {
 	res.render('upload');
 });
 
 // Use progress->multer bundle to handle uploads.
-serviceRouter.post('/upload', verifier, (req, res) => {
+serviceRouter.post('/upload', verifyer, (req, res) => {
 	const bodyProgress = progress();
 	const fileLength = +req.headers['content-length']; // берём длину всего тела запроса
 
@@ -116,7 +116,7 @@ serviceRouter.post('/upload', verifier, (req, res) => {
 });
 
 // With uploads history
-serviceRouter.get('/history', verifier, async (req, res) => {
+serviceRouter.get('/history', verifyer, async (req, res) => {
 	logLine('In history req.session: ', req.session);
 
 	const storageJson = await fsp.readFile(
@@ -130,7 +130,7 @@ serviceRouter.get('/history', verifier, async (req, res) => {
 });
 
 // Download of file initiated ftom the client
-serviceRouter.get('/download/:downloadId', verifier, async (req, res) => {
+serviceRouter.get('/download/:downloadId', verifyer, async (req, res) => {
 	const storageJson = await fsp.readFile(
 		path.join(__dirname, '../', 'public', 'storage.json'),
 		'utf8'

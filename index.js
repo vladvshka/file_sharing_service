@@ -50,10 +50,6 @@ wsServer.on('connection', connection => {
 
 webserver
 	.use(session(sessionOptions))
-	// .use((req, res, next) => {
-	// 	logLine(`session: ${JSON.stringify(req.session)}`);
-	// 	next();
-	// })
 	.use(express.urlencoded({ extended: true }))
 	.use(express.static(path.join(__dirname, 'public')))
 	.use('/shared/', express.static(path.resolve(__dirname, 'shared')))
