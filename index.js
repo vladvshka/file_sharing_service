@@ -63,7 +63,10 @@ webserver
 	.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
 	// routers
 	.use('/', authRouter)
-	.use('/', serviceRouter);
+	.use('/', serviceRouter)
+	.use('*', (req, res) => {
+		res.sendFile(path.join(__dirname, 'public', 'notFound.html'));
+	});
 
 webserver.listen(port, () =>
 	logLine(`File uploader listening on port ${port}!`)

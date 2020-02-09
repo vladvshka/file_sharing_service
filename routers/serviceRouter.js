@@ -27,30 +27,21 @@ const upload = multer({ storage: multerStorage });
 // fieldname === attachment, it must be the name of input type="file"
 const attachment = upload.single('attachment');
 
-serviceRouter.use((req, res, next) => {
+const verifier = (req, res, next) => {
 	logLine(`In service Router: ${JSON.stringify(req.session, null, 2)}`);
 	if (req.session.isAuthorized) {
-		// req.session.cookie.expires = new Date(Date.now() + 1000000);
-
-		// // TODO: issue of not refreshing cookie in browser
-		// req.session.save(err => {
-		// 	if (err) {
-		// 		res.status(500).render('authForm', {
-		// 			signIn: true,
-		// 			internalError: JSON.stringify(err.message)
-		// 		});
-		// 	}
-
-		// 	next();
-		// });
 		next();
 	} else {
 		res.redirect(302, '/sign-in/unauthorized');
 	}
+};
+
+serviceRouter.get('/upload', verifier, async (req, res) => {
+	res.render('upload');
 });
 
 // Use progress->multer bundle to handle uploads.
-serviceRouter.post('/upload', (req, res) => {
+serviceRouter.post('/upload', verifier, (req, res) => {
 	const bodyProgress = progress();
 	const fileLength = +req.headers['content-length']; // берём длину всего тела запроса
 
@@ -124,12 +115,8 @@ serviceRouter.post('/upload', (req, res) => {
 	});
 });
 
-serviceRouter.get('/', async (req, res) => {
-	res.render('main');
-});
-
 // With uploads history
-serviceRouter.get('/history', async (req, res) => {
+serviceRouter.get('/history', verifier, async (req, res) => {
 	logLine('In history req.session: ', req.session);
 
 	const storageJson = await fsp.readFile(
@@ -139,11 +126,11 @@ serviceRouter.get('/history', async (req, res) => {
 
 	const { uploads } = JSON.parse(storageJson);
 
-	res.render('main', { shouldShowHistory: true, uploads });
+	res.render('upload', { shouldShowHistory: true, uploads });
 });
 
 // Download of file initiated ftom the client
-serviceRouter.get('/download/:downloadId', async (req, res) => {
+serviceRouter.get('/download/:downloadId', verifier, async (req, res) => {
 	const storageJson = await fsp.readFile(
 		path.join(__dirname, '../', 'public', 'storage.json'),
 		'utf8'
@@ -164,11 +151,6 @@ serviceRouter.get('/download/:downloadId', async (req, res) => {
 		res.setHeader('Content-Disposition', 'attachment');
 		res.download(file, fileName);
 	}
-});
-
-// Wrong URLs' handler
-serviceRouter.get('*', (req, res) => {
-	res.render('authForm', { signIn: true });
 });
 
 export { serviceRouter };

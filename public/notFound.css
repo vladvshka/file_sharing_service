@@ -1,0 +1,102 @@
+body {
+	margin: 0;
+	padding: 0;
+	background-color: #222;
+	display: flex;
+	flex-direction: column;
+}
+* {
+	font-family: Helvetica, sans-serif;
+	color: #555;
+}
+#menu {
+	display: none;
+}
+#menu:checked ~ .menu {
+	width: 500px;
+	border-radius: 5px;
+	background-color: transparent;
+	border: 3px solid #f44336;
+	height: 85px;
+}
+#menu:checked ~ .menu > ul {
+	display: block;
+	opacity: 1;
+}
+#menu:checked ~ .menu > .barry {
+	display: none;
+}
+.menu {
+	display: block;
+	margin: 30px auto;
+	width: 100px;
+	height: 100px;
+	background-color: #f44336;
+	border: 3px solid transparent;
+	border-radius: 50%;
+	overflow: hidden;
+	cursor: pointer;
+	transition: all 0.5s ease-in-out;
+	-webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	-o-transition: all 0.5s ease-in-out;
+	-ms-transition: all 0.5s ease-in-out;
+}
+.menu div.barry {
+	width: 40px;
+	margin: 35px auto;
+}
+.menu div.barry .bar {
+	display: block;
+	width: 100%;
+	height: 5px;
+	margin-top: 3px;
+	border-radius: 2px;
+	background-color: #fff;
+}
+.menu ul {
+	opacity: 0;
+	display: none;
+	transition: all 0.5s ease-in-out;
+	-webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	-o-transition: all 0.5s ease-in-out;
+	-ms-transition: all 0.5s ease-in-out;
+	list-style-type: none;
+	padding: 0;
+	width: 500px;
+	text-align: center;
+	margin-bottom: 0;
+}
+.menu ul li {
+	display: inline-block;
+}
+.menu ul li a {
+	text-decoration: none;
+	display: inline-block;
+	padding: 15px 25px;
+	color: #f44336;
+	font-size: 20px;
+	transition: all 0.3s ease-in-out;
+	-webkit-transition: all 0.3s ease-in-out;
+	-moz-transition: all 0.3s ease-in-out;
+	-o-transition: all 0.3s ease-in-out;
+	-ms-transition: all 0.3s ease-in-out;
+	border: 3px solid transparent;
+	border-radius: 5px;
+}
+.menu ul li a:hover {
+	border-color: #f44336;
+}
+.menu ul li a:target {
+	border-bottom-color: #f44336;
+}
+#code {
+	font-size: 220px;
+	position: relative;
+	display: inline-block;
+	z-index: 2;
+	height: 250px;
+	letter-spacing: 15px;
+	margin: 30px auto;
+}

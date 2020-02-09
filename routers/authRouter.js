@@ -15,6 +15,10 @@ authRouter.use((req, res, next) => {
 	next();
 });
 
+authRouter.get('/', (req, res) => {
+	res.redirect(302, '/sign-in');
+});
+
 authRouter.get('/sign-up', (req, res) => {
 	res.render('authForm', { signUp: true });
 });
@@ -47,7 +51,10 @@ authRouter.get('/sign-in/:token', async (req, res) => {
 				break;
 		}
 	} catch (error) {
-		res.status(500).send(JSON.stringify(error.message));
+		res.status(404).render('authForm', {
+			signIn: true,
+			noUser: true
+		});
 	}
 });
 
@@ -119,7 +126,7 @@ authRouter.post('/sign-in', upload.none(), async (req, res) => {
 							});
 						}
 
-						res.redirect(302, '../');
+						res.redirect(302, '../upload');
 					});
 				} else {
 					res.status(403).render('authForm', {
