@@ -13,7 +13,7 @@ import { sequelize } from './dataBaseService/service';
 import { getSessionConfigs } from './configs/sessionConfigs';
 
 const webserver = express();
-const port = 7180;
+const port = 8000;
 
 // Custom session store for express-session based on Sequilize.
 const SequelizeStore = sessionStoreConnector(session.Store);
@@ -23,7 +23,7 @@ const sessionStore = new SequelizeStore({
 });
 
 // init WS-server
-const wsServer = new WebSocket.Server({ port: 7182 });
+const wsServer = new WebSocket.Server({ port: 7180 });
 
 // generate session options, sessionStore is used as store for sessions
 const sessionOptions = getSessionConfigs(sessionStore);
