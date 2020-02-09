@@ -23,7 +23,7 @@ const sessionStore = new SequelizeStore({
 });
 
 // init WS-server
-const wsServer = new WebSocket.Server({ port: 7181 });
+const wsServer = new WebSocket.Server({ port: 7182 });
 
 // generate session options, sessionStore is used as store for sessions
 const sessionOptions = getSessionConfigs(sessionStore);

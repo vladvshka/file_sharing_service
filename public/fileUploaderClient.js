@@ -28,7 +28,7 @@ import { CONNECTION_ID, PROGRESS, logLine } from '../shared/index.js';
 	const establishWebSocketConnection = () => {
 		const connectionId = uuidv4();
 		// TODO - will be a local IP after nginx
-		const url = `ws://${window.location.hostname}:7181/`;
+		const url = `ws://${window.location.hostname}:7182/`;
 		/**
 		 * Web socket protocol supports text and binary data.
 		 * In terms of Javascript, text refers to as a string, while binary data is represented like ArrayBuffer.
