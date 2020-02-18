@@ -25,7 +25,7 @@ module.exports = {
 			host: 'localhost',
 			ref: 'origin/master',
 			repo: 'git@github.com:vladvshka/file_sharing_service.git',
-			path: '/deploy',
+			path: '/home/user/nodeProjects/file_sharing_service',
 			// TODO: add script restoring DB
 			// "pre-setup" : "apt-get install git",
 			'post-deploy':
