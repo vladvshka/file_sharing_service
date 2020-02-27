@@ -1,0 +1,29 @@
+doctype html
+head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    meta(http-equiv='X-UA-Compatible' content='ie=edge')
+    link(rel='stylesheet' type='text/css' href='../style.css')
+    link(href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css", rel="stylesheet", integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh", crossorigin="anonymous")
+    title File Uploader - Gallery
+include navBar.pug
+.container
+    include infoMessage.pug
+    if images
+        .album.py-5.bg-light
+            .container
+                .row
+                    each image in images
+                        .col-md-4
+                            .card.mb-4.shadow-sm
+                                img(src=`${image.pathToImg}` alt=`${image.fileName}`)
+                                .card-body
+                                    h5= image.fileName
+                                    p.card-text= image.comment
+                                    .d-flex.justify-content-between.align-items-center
+                                        .btn-group
+                                            button.btn.btn-sm.btn-outline-secondary(type='button') View
+                                            button.btn.btn-sm.btn-outline-secondary(type='button') Edit
+
+    
+        

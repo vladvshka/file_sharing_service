@@ -9,6 +9,7 @@ import { CONNECTION_ID, logLine } from './shared/index';
 import { webSocketsWatcher } from './utils/webSocketsHelpers';
 import { authRouter } from './routers/authRouter';
 import { serviceRouter } from './routers/serviceRouter';
+import { galleryRouter } from './routers/galleryRouter';
 import { sequelize } from './dataBaseService/service';
 import { getSessionConfigs } from './configs/sessionConfigs';
 
@@ -60,6 +61,7 @@ webserver
 	// routers
 	.use('/', authRouter)
 	.use('/', serviceRouter)
+	.use('/', galleryRouter)
 	.use('*', (req, res) => {
 		res.sendFile(path.join(__dirname, 'public', 'notFound.html'));
 	});

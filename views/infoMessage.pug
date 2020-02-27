@@ -22,3 +22,6 @@ if verifyEmail
 if internalError
     div
         .alert.alert-danger(role='alert')= internalError
+if emptyMsg
+    div
+        .alert.alert-warning(role='alert') Sorry, no images found.
