@@ -19,7 +19,7 @@ galleryRouter.get('/gallery', async (req, res) => {
 
 		if (imageReg.test(fileName)) {
 			// to thumb!
-			const pathToImg = path.join('uploads', fileName);
+			const pathToImg = path.join('gallery', fileName);
 			accum.push({
 				pathToImg,
 				fileName,
